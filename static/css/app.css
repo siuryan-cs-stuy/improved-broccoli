@@ -1,0 +1,21 @@
+/*
+.top-bar, .top-bar ul {
+    background-color: #d7e4f7;
+}
+*/
+
+.top-bar .input-group {
+    margin-bottom: 0;
+}
+
+.top-bar .menu-text {
+
+}
+
+footer {
+    background-color: #939393;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin: auto;
+}
