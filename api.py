@@ -108,16 +108,5 @@ def getPrice (schoolId):
     data = r.text
     school = json.loads(data)
     return school[u'results'][0][u'2015'][u'cost'][u'avg_net_price'][u'overall']
-
-def getCompletion (schoolId):
-    url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.collegeKey, schoolId)
-    r = requests.get(url)
-    data = r.text
-    school = json.loads(data)
-    return school[u'results'][0][u'2015'][u'completion'].keys()
-
-
-
-print getCompletion(164924)
         
                       
