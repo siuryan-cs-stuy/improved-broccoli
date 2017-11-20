@@ -7,3 +7,5 @@ Add prototype navbar
 siuR -- 2017-11-19 12:19:07
 Finish base template with header and footer
 
+marchiniM -- 2017-11-19 11:03:15
+Added getId, getName, getCity, getState, getPrice, getPriceUrl, getUrl, getGender, getSat, and getAct functions to api.py
