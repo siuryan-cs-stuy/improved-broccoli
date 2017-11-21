@@ -9,7 +9,7 @@ def root():
 
 @app.route('/index')
 def index():
-    return redirect(url_for('/')
+    return redirect(url_for('/'))
 
 #if there is an exact match, redirects to profile with the id passed as a parameter; if not, redirects to result page with list of all ids passed
 @app.route('/search', methods=["POST", "GET"])
