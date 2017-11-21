@@ -8,9 +8,11 @@
     margin-bottom: 0;
 }
 
+/*
 .top-bar .menu-text {
 
 }
+*/
 
 footer {
     background-color: #939393;
@@ -18,4 +20,13 @@ footer {
     bottom: 0;
     width: 100%;
     margin: auto;
+}
+
+.responsive-embed iframe {
+    height: auto;
+    min-height: 20em;
+}
+
+.responsive-embed {
+    padding-bottom: 20em;
 }

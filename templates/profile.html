@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+Name of College -- placeholder
+{% endblock %}
+
+{% block content %}
+<div class="grid-x grid-padding-x">
+  <div class="large-12 cell">
+    <h1>College Name</h1>
+  </div>
+</div>
+
+<div class="grid-x grid-padding-x">
+  <div class="large-6 medium-6 cell responsive-embed">
+    <iframe src="https://www.google.com/maps/embed/v1/place?key={{ GOOGLE_API_KEY }}&q=Eiffel+Tower,Paris+France" frameborder="0" allowfullscreen>
+    </iframe>
+  </div>
+  <div class="large-6 medium-6 cell">
+    Stats
+  </div>
+</div>
+
+<div class="grid-x grid-padding-x">
+  <div class="large-12 cell callout">
+    Callout
+  </div>
+</div>
+
+<div class="grid-x grid-padding-x">
+  <div class="large-12 cell callout">
+    Callout
+  </div>
+</div>
+{% endblock %}
