@@ -48,7 +48,7 @@ def results():
     nameList = []
     for school in ids:
         nameList.append(api.getName(school))
-    return render_template('results.html', ids = idList, names = nameList)
+    return render_template('results.html', ids = idList, names = nameList,length = len(ids))
     
     
 
