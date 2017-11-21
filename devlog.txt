@@ -16,6 +16,9 @@ Updated main.py:
   /search redirects to either /profile or /results
   /profile gathers all the data for a school and renders profile.html with all the data passed as parameters
   /results makes a list of names for every id and renders results.html with the list of names and the list of ids as parameters
+
+siuR -- 2017-11-20 22:00:32
+Work on college profile template
+
 WongE -- 2017-11-20 22:49:39
 made results.html
-
