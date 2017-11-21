@@ -4,6 +4,11 @@ import config
 
 app = Flask(__name__)
 
+def format_currency(value):
+        return "${:,}".format(value)
+
+app.jinja_env.filters['format_currency'] = format_currency
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -29,15 +34,15 @@ def profile():
     college['name'] = api.getName(school_id)
     college['city'] = api.getCity(school_id)
     college['state'] = api.getState(school_id)
-    website = api.getUrl(school_id)
+    college['website'] = api.getUrl(school_id)
     netPriceSite = api.getPriceUrl(school_id)
     gender = api.getGender(school_id)
-    admRate = api.getAdmRate(school_id)
+    college['admRate'] = api.getAdmRate(school_id)
     #satInfo and actInfo are lists of overall and section averages
-    satInfo = api.getSat(school_id)
-    actInfo = api.getAct(school_id)
-    avgPrice = api.getPrice(school_id)
-    return render_template('profile.html', college = college, website = website, netPriceSite = netPriceSite, gender = gender, admRate = admRate, satInfo = satInfo, actInfo = actInfo, avgPrice = avgPrice, GOOGLE_API_KEY = config.GOOGLE_API_KEY)
+    college['satInfo'] = api.getSat(school_id)
+    college['actInfo'] = api.getAct(school_id)
+    college['avgPrice'] = api.getPrice(school_id)
+    return render_template('profile.html', college = college, netPriceSite = netPriceSite, gender = gender, GOOGLE_API_KEY = config.GOOGLE_API_KEY)
 
 #renders results.html and passes list of ids and list of names 
 @app.route('/results', methods=["POST", "GET"])

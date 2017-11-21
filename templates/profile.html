@@ -17,7 +17,17 @@
     </iframe>
   </div>
   <div class="large-6 medium-6 cell">
-    Stats
+    <strong>Overview</strong>
+    <table>
+      <tr><td>Website</td><td><a href="{{ college.website }}">{{ college.website }}</a></td></tr>
+      <tr><td>Location</td><td>{{ college.city }}, {{ college.state }}</td></tr>
+      <tr><td>Average SAT</td><td>{{ college.satInfo[0] | int }}</td></tr>
+      <tr><td>Average ACT</td><td>{{ college.actInfo[0] | int }}</td></tr>
+      <tr><td>Undergraduate Enrollment</td><td></td></tr>
+      <tr><td>Average Tuition</td><td>{{ college.avgPrice | format_currency }}</td></tr>
+      <tr><td>Acceptance Rate</td><td>{{ college.admRate }}</td></tr>
+      <tr>
+    </table>
   </div>
 </div>
 

@@ -22,3 +22,6 @@ Work on college profile template
 
 WongE -- 2017-11-20 22:49:39
 made results.html
+siuR -- 2017-11-21 10:39:34
+Add stats to profile page
+
