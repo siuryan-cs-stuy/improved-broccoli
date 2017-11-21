@@ -9,6 +9,13 @@ Finish base template with header and footer
 
 marchiniM -- 2017-11-19 11:03:15
 Added getId, getName, getCity, getState, getPrice, getPriceUrl, getUrl, getGender, getSat, and getAct functions to api.py
+
+marchiniM -- 2017-11-20 19:58:19
+Updated main.py:
+  /index redirects to the root
+  /search redirects to either /profile or /results
+  /profile gathers all the data for a school and renders profile.html with all the data passed as parameters
+  /results makes a list of names for every id and renders results.html with the list of names and the list of ids as parameters
+
 siuR -- 2017-11-20 22:00:32
 Work on college profile template
-
