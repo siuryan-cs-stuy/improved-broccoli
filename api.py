@@ -15,7 +15,9 @@ def getId (schoolName):
     #print schools
     #print schools[u'results'][0][u'school'][u'name']
     if (schools[u'results'][0][u'school'][u'name']) == schoolName:
-        return schools[u'results'][0][u'id']
+        idList = []
+        idList.append(schools[u'results'][0][u'id'])
+        return idList
     else:
         idList = []
         for school in schools[u'results']:
