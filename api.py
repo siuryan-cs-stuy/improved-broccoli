@@ -110,5 +110,9 @@ def getPrice (schoolId):
     data = r.text
     school = json.loads(data)
     return school[u'results'][0][u'2015'][u'cost'][u'avg_net_price'][u'overall']
-        
+       
+    
+def getMap(name):
+    <iframe width="600" height="450" frameborder="0" style="border:0"
+src="https://www.google.com/maps/embed/v1/place?q=%s&key=%s" %(schoolName,config.mapKey) allowfullscreen></iframe>
                       
