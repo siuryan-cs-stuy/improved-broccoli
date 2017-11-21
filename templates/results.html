@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> 
+			results
+		</title>
+	</head>
+	<body>
+		<h1 style="text-align:center"> returned {{length}} results </h1>
+		<br>
+		<br>
+		<!--header that lets you switch to other routes will be created in structure.html or base.html to be extended-->
+		<!--names will all be linked to something at the end -->
+	<table style="width:100%">
+		<tr>
+			<th>id</th>
+			<th>name</th>
+		</tr>
+		{% for loop.index0 < length %}
+		<tr>
+			<td>{{id[loop.index0]}}</td>
+			<td>{{names[loop.index0]}}</td>
+		<tr>
+		{% endfor %}
+		</table>
+	</body>
+</html>
