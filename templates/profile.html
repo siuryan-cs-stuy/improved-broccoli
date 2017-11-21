@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block scripts %}
+
+{% endblock %}
+
 {% block title %}
 {{ college.name }}
 {% endblock %}
@@ -17,29 +21,41 @@
     </iframe>
   </div>
   <div class="large-6 medium-6 cell">
-    <strong>Overview</strong>
+    <strong>At a Glance (2015)</strong>
     <table>
-      <tr><td>Website</td><td><a href="{{ college.website }}">{{ college.website }}</a></td></tr>
+      <tr><td>Website</td><td><a href="{{ college.website | external_url }}" target="_blank">{{ college.website }}</a></td></tr>
       <tr><td>Location</td><td>{{ college.city }}, {{ college.state }}</td></tr>
       <tr><td>Average SAT</td><td>{{ college.satInfo[0] | int }}</td></tr>
       <tr><td>Average ACT</td><td>{{ college.actInfo[0] | int }}</td></tr>
       <tr><td>Undergraduate Enrollment</td><td></td></tr>
-      <tr><td>Average Tuition</td><td>{{ college.avgPrice | format_currency }}</td></tr>
       <tr><td>Acceptance Rate</td><td>{{ college.admRate }}</td></tr>
-      <tr>
+      <tr><td>Gender Only</td><td>{{ college.gender }}</td></tr>
     </table>
   </div>
 </div>
 
 <div class="grid-x grid-padding-x">
-  <div class="large-12 cell callout">
-    Callout
+  <div class="large-6 cell callout">
+    <p>Financial Aid</p>
+    <p><a href="https://collegecost.ed.gov/netpricecenter.aspx" target="_blank">Net Price</a> is the amount that a student pays to attend an institution in a single academic year AFTER subtracting scholarships and grants the student receives. Net price calculators are available on a college’s or university’s website and allow prospective students to enter information about themselves to find out what students like them paid to attend the institution in the previous year, taking grants and scholarship aid into account.</p>
+    <table>
+      <tr><td>Net Price Calculator</td><td><a href="{{ college.netPriceSite | external_url }}" target="_blank">{{ college.netPriceSite }}</a></td></tr>
+      <tr><td>Average Tuition</td><td>{{ college.avgPrice | currency }}</td></tr>
+      <tr><td>Median Debt</td><td></td></tr>
+      <tr><td>Pell Grant Rate</td><td></td></tr>
+    </table>
   </div>
-</div>
 
-<div class="grid-x grid-padding-x">
-  <div class="large-12 cell callout">
-    Callout
+  <div class="large-6 cell callout">
+    <div class="grid-x grid-padding-x">
+      <div class="large-12 cell">
+        Degrees
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
+      <div class="large-12 cell">
+
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

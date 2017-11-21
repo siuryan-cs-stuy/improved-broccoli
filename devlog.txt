@@ -25,3 +25,6 @@ made results.html
 siuR -- 2017-11-21 10:39:34
 Add stats to profile page
 
+siuR -- 2017-11-21 14:50:15
+Fix results and search views
+

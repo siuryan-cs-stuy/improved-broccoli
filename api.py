@@ -51,11 +51,11 @@ def getGender (schoolId):
     data = r.text
     school = json.loads(data)
     if (school[u'results'][0][u'school'][u'women_only']) == 1:
-        return "Women Only"
+        return "Women"
     if (school[u'results'][0][u'school'][u'men_only']) == 1:
-        return "Men Only"
+        return "Men"
     else:
-        return "No gender restriction"
+        return "No"
 
 def getCity (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
