@@ -16,10 +16,10 @@
 			<th>id</th>
 			<th>name</th>
 		</tr>
-		{% for loop.index0 < length %}
+		{% for id in schools %}
 		<tr>
-			<td>{{id[loop.index0]}}</td>
-			<td>{{names[loop.index0]}}</td>
+			<td>{{id}}</td>
+			<td>{{schools[id]}}</td>
 		<tr>
 		{% endfor %}
 		</table>
