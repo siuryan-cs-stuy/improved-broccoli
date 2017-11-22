@@ -23,9 +23,12 @@
       <div class="top-bar-left">
         <ul class="menu">
           <li class="menu-text">Naviance II</li>
-          <li><a href="{{ url_for('index') }}">Colleges</a></li>
+          <li><a href="{{ url_for('colleges') }}">Colleges</a></li>
         </ul>
       </div>
+
+      <!-- if not home page -->
+      {% if not homepage %}
       <div class="top-bar-right">
         <ul class="menu">
           <form name="search" action="{{ url_for('results') }}" method="GET">
@@ -38,6 +41,8 @@
           </form>
         </ul>
       </div>
+      {% endif %}
+
     </div>
 
     <section class="main">
