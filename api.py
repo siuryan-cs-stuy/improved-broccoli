@@ -139,12 +139,4 @@ def getEthnicity (schoolId):
     data = r.text
     school = json.loads(data)
     ethList = []
-    ethList.append(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity']
-
-
-
-
-
-
-
-
+    ethList.append(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'])

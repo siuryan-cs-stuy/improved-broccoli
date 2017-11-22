@@ -34,6 +34,11 @@ def profile():
     college['satInfo'] = api.getSat(school_id)
     college['actInfo'] = api.getAct(school_id)
     college['avgPrice'] = api.getPrice(school_id)
+
+    #testing
+    college['degrees_labels'] = ['Computer Science', 'Engineering', 'Mathematics', 'Science', 'Social Science', 'Other']
+    college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.05]
+
     return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY)
 
 #renders results.html and passes list of ids and list of names 
@@ -45,8 +50,8 @@ def results():
         return redirect(url_for('profile', school_id = ids[1]))
 
     schools = {}
-    for school in ids:
-        schools['id'] = api.getName(school)
+    for school_id in ids:
+        schools[school_id] = api.getName(school_id)
 
     return render_template('results.html', schools = schools)
 

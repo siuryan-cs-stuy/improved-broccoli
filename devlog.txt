@@ -28,3 +28,6 @@ Add stats to profile page
 siuR -- 2017-11-21 14:50:15
 Fix results and search views
 
+siuR -- 2017-11-21 21:33:22
+Add JS chart to profile page
+
