@@ -48,3 +48,7 @@ footer {
 .jumbotron .callout {
     border-radius: 2em;
 }
+
+.button-no-margin {
+    margin: 0px;
+}

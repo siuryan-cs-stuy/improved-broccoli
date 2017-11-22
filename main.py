@@ -47,18 +47,15 @@ def results():
     query = request.args.get('search')
     ids = api.getId(query)
     if len(ids) == 1:
-        return redirect(url_for('profile', school_id = ids[1]))
+        return redirect(url_for('profile', school_id = ids[0]))
 
     schools = {}
+    school_locations = {}
     for school_id in ids:
         schools[school_id] = api.getName(school_id)
+        school_locations[school_id] = api.getCity(school_id) + ', ' + api.getState(school_id)
 
-    return render_template('results.html', schools = schools)
-
-# list of all colleges
-@app.route('/colleges')
-def colleges():
-    return "hi"
+    return render_template('results.html', schools = schools, school_locations = school_locations)
 
 if __name__ == '__main__':
     app.debug = True
