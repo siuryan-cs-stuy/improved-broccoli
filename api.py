@@ -133,10 +133,45 @@ def getCompletion (schoolId):
     school = json.loads(data)
     return str(school[u'results'][0][u'2015'][u'completion'][u'rate_suppressed'][u'overall'] * 100) + '%'
 
+#list format native hawiian pacific islander, black, asian, unknown, white, mixed race, hispanic, alaskan/native american
 def getEthnicity (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
     data = r.text
     school = json.loads(data)
     ethList = []
-    ethList.append(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'])
+    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'nhpi'] * 100) + '%')
+    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'black'] * 100) + '%')
+    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'asian'] * 100) + '%')
+    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'unknown'] * 100) + '%')
+    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'white'] * 100) + '%')
+    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'tow_or_more'] * 100) + '%')
+    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'hispanic'] * 100) + '%')
+    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'aian'] * 100) + '%')
+    return ethList
+
+#returns dictionary; key = degree, value = percentage
+def getDegrees (schoolId):
+    url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
+    r = requests.get(url)
+    data = r.text
+    school = json.loads(data)
+    degrees = {}
+    programs = school[u'results'][0][u'2015'][u'academics'][u'program_percentage']
+    for degree in programs:
+	if programs[degree] not == 0:
+	    degrees[degree] = programs[degree] * 100
+    return degrees
+
+def getSize (schoolId):
+    url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
+    r = requests.get(url)
+    data = r.text
+    school = json.loads(data)
+    return school[u'results'][0][u'2015'][u'student'][u'size']
+
+	
+    
+
+
+
