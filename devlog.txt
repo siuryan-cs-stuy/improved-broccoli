@@ -24,4 +24,6 @@ WongE -- 2017-11-20 22:49:39
 made results.html
 siuR -- 2017-11-21 10:39:34
 Add stats to profile page
+chenK -- 2017.11.21 20:36:42
+made db.py:created tables and made functions get_id(of user) and adduser 
 
