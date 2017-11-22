@@ -11,3 +11,4 @@ def login(username,password):
 	return encrypt(password) == db.get_pass(username)
 
 
+#add session for login
