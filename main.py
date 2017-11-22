@@ -36,8 +36,8 @@ def profile():
     college['avgPrice'] = api.getPrice(school_id)
 
     #testing
-    college['degrees_labels'] = ['Computer Science', 'Engineering', 'Mathematics', 'Science', 'Social Science', 'Other']
-    college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.05]
+    college['degrees_labels'] = ['Computer Science', 'Engineering', 'Mathematics', 'Science', 'Social Science', 'English', 'History', 'Other']
+    college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.03, 0.01, 0.01]
 
     return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY)
 

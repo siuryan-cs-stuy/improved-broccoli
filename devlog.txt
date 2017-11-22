@@ -22,14 +22,19 @@ Work on college profile template
 
 WongE -- 2017-11-20 22:49:39
 made results.html
+
 siuR -- 2017-11-21 10:39:34
 Add stats to profile page
-chenK -- 2017.11.21 20:36:42
-made db.py:created tables and made functions get_id(of user) and adduser 
+
+chenK -- 2017-11-21 20:36:42
+made db.py:created tables and made functions get_id(of user) and adduser
 
 siuR -- 2017-11-21 14:50:15
 Fix results and search views
 
 siuR -- 2017-11-21 21:33:22
 Add JS chart to profile page
+
+siuR -- 2017-11-22 10:36:04
+Wrote temp formula for graph colors
 
