@@ -16,7 +16,7 @@ app.jinja_env.filters['external_url'] = format_url
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', homepage = True)
 
 @app.route('/profile')
 def profile():
@@ -54,6 +54,11 @@ def results():
         schools[school_id] = api.getName(school_id)
 
     return render_template('results.html', schools = schools)
+
+# list of all colleges
+@app.route('/colleges')
+def colleges():
+    return "hi"
 
 if __name__ == '__main__':
     app.debug = True
