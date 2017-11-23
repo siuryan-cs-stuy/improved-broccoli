@@ -2,7 +2,7 @@ var ctx;
 
 $(document).ready(
   function() {
-    ctx = document.getElementById("myChart").getContext('2d');
+    ctx = document.getElementById("degreesCanvas").getContext('2d');
 
     var myDoughnutChart = new Chart(ctx, {
       type: 'doughnut',
@@ -21,6 +21,29 @@ $(document).ready(
 
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: chartConfig.degrees_labels
+      },
+      options: {}
+    });
+
+    ctx = document.getElementById("ethnicitiesCanvas").getContext('2d');
+
+    var myDoughnutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: chartConfig.eth_data,
+          backgroundColor: generateColors(chartConfig.eth_data.length, 0.2),
+            //'rgba(255, 99, 132, 0.2)',
+            //'rgba(255, 206, 86, 0.2)',
+            //'rgba(54, 162, 235, 0.2)'
+          borderColor: generateColors(chartConfig.eth_data.length, 1)
+            //'rgba(255, 99, 132, 1)',
+            //'rgba(255, 206, 86, 1)',
+            //'rgba(54, 162, 235, 1)'
+        }],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: chartConfig.eth_labels
       },
       options: {}
     });
@@ -43,6 +66,3 @@ function generateRGBColors(num, r, g, b, a) {
   }
   return colors;
 }
-
-console.log(generateColors(chartConfig.degrees_data.length, 0.2));
-console.log(generateColors(chartConfig.degrees_data.length, 1));

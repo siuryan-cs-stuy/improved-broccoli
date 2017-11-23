@@ -29,15 +29,41 @@ def profile():
     college['website'] = api.getUrl(school_id)
     college['netPriceSite'] = api.getPriceUrl(school_id)
     college['gender'] = api.getGender(school_id)
+    college['completion'] = api.getCompletion(school_id)
     college['admRate'] = api.getAdmRate(school_id)
     #satInfo and actInfo are lists of overall and section averages
     college['satInfo'] = api.getSat(school_id)
     college['actInfo'] = api.getAct(school_id)
+    college['size'] = api.getSize(school_id)
     college['avgPrice'] = api.getPrice(school_id)
+    college['debt'] = api.getDebt(school_id)
+    college['pell'] = api.getPellGrant(school_id)
+
+    degrees = api.getDegrees(school_id)
+
+    degrees_labels = []
+    degrees_data = []
+    for deg in degrees:
+        degrees_labels.append(str(deg.replace('_', ' ').capitalize()))
+        degrees_data.append(round(float(degrees[deg]), 2))
+
+    college['degrees_labels'] = degrees_labels
+    college['degrees_data'] = degrees_data
+
+    eth = api.getEthnicity(school_id)
+
+    eth_labels = []
+    eth_data = []
+    for e in eth:
+        eth_labels.append(e)
+        eth_data.append(round(float(eth[e]), 2))
+
+    college['eth_labels'] = eth_labels
+    college['eth_data'] = eth_data
 
     #testing
-    college['degrees_labels'] = ['Computer Science', 'Engineering', 'Mathematics', 'Science', 'Social Science', 'English', 'History', 'Other']
-    college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.03, 0.01, 0.01]
+    #college['degrees_labels'] = ['Computer Science', 'Engineering', 'Mathematics', 'Science', 'Social Science', 'English', 'History', 'Other']
+    #college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.03, 0.01, 0.01]
 
     return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY)
 

@@ -32,6 +32,7 @@ footer {
 
 .responsive-embed {
     padding-bottom: 20em;
+    margin-bottom: 0em;
 }
 
 .jumbotron {
@@ -51,4 +52,8 @@ footer {
 
 .button-no-margin {
     margin: 0px;
+}
+
+.card img {
+    min-height: 200px;
 }

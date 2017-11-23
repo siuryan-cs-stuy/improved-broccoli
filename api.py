@@ -123,7 +123,7 @@ def getDebt (schoolId):
     r = requests.get(url)
     data = r.text
     school = json.loads(data)
-    return school[u'results'][0][u'2015'][u'aid'][u'median_debt_suppressed'][u'overall']
+    return int(school[u'results'][0][u'2015'][u'aid'][u'median_debt_suppressed'][u'overall'])
 
 
 def getCompletion (schoolId):
@@ -139,16 +139,16 @@ def getEthnicity (schoolId):
     r = requests.get(url)
     data = r.text
     school = json.loads(data)
-    ethList = []
-    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'nhpi'] * 100) + '%')
-    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'black'] * 100) + '%')
-    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'asian'] * 100) + '%')
-    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'unknown'] * 100) + '%')
-    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'white'] * 100) + '%')
-    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'tow_or_more'] * 100) + '%')
-    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'hispanic'] * 100) + '%')
-    ethList.append(str(school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'aian'] * 100) + '%')
-    return ethList
+    eth = {}
+    eth['Hawaiian or Pacific Islander'] = school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'nhpi'] * 100
+    eth['Black'] = school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'black'] * 100
+    eth['Asian'] = school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'asian'] * 100
+    eth['Unknown'] = school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'unknown'] * 100
+    eth['White'] = school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'white'] * 100
+    eth['Two or more'] = school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'two_or_more'] * 100
+    eth['Hispanic'] = school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'hispanic'] * 100
+    eth['Alaskan or Native American'] = school[u'results'][0][u'2015'][u'student'][u'demographics'][u'race_ethnicity'][u'aian'] * 100
+    return eth
 
 #returns dictionary; key = degree, value = percentage
 def getDegrees (schoolId):
@@ -159,8 +159,8 @@ def getDegrees (schoolId):
     degrees = {}
     programs = school[u'results'][0][u'2015'][u'academics'][u'program_percentage']
     for degree in programs:
-	if programs[degree] not == 0:
-	    degrees[degree] = programs[degree] * 100
+        if not programs[degree] == 0:
+            degrees[degree] = programs[degree] * 100
     return degrees
 
 def getSize (schoolId):
@@ -169,9 +169,3 @@ def getSize (schoolId):
     data = r.text
     school = json.loads(data)
     return school[u'results'][0][u'2015'][u'student'][u'size']
-
-	
-    
-
-
-
