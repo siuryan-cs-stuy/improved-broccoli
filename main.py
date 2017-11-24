@@ -85,6 +85,26 @@ def results():
 
     return render_template('results.html', schools = schools, school_locations = school_locations)
 
+@app.route('/favorites')
+def favorites():
+    faveList = []
+    if session['username'] != None:
+        s_id = db.getID(session['username'])
+        for school in db.getfavs(s_id):
+            faveList.append(school[0])
+        schools = {}
+        for school_id in faveList:
+            schools[school_id] = api.getName(school_id)
+        return render_template('favorites.html', schools = schools)
+
+@app.route('/removeFave')
+def removeFave():
+   school_id = request.form('school_id')
+   s_id = db.getID(session['username'])
+   db.removeFave(school_id, s_id)
+   return redirect(url_for('favorites'))
+        
+
 if __name__ == '__main__':
     app.debug = True
     app.run()

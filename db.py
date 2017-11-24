@@ -76,4 +76,11 @@ def getfavs(s_id):
     db.close()
     return result
 
+def removeFave(school_id, s_id):
+    f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('DELETE FROM favorites WHERE college_id == "%d" AND user_id == "%d";' %(school_id, s_id))
+    db.close()
+
 adduser
