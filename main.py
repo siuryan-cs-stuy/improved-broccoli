@@ -4,6 +4,7 @@ import config
 import auth
 
 app = Flask(__name__)
+app.secret_key = auth.make_secret_key()
 
 def format_currency(value):
     return "${:,}".format(value)
