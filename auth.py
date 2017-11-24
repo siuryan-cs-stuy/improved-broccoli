@@ -26,3 +26,9 @@ def login(username, password): #creates a new session if username and password m
 		return True
 	else:
 		return False
+
+def logout():
+	if('username' in session):
+		session.pop('username')
+	if('password' in session):
+		session.pop('password')
