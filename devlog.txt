@@ -32,6 +32,9 @@ made db.py:created tables and made functions get_id(of user) and adduser
 siuR -- 2017-11-21 14:50:15
 Fix results and search views
 
+marchiniM -- 2017-11-21 14:50:00
+Added getDebt, getPellGrant, and getCompletion to api.py
+
 siuR -- 2017-11-21 21:33:22
 Add JS chart to profile page
 
@@ -40,6 +43,9 @@ Wrote temp formula for graph colors
 
 siuR -- 2017-11-22 14:09:42
 Finsh index template
+
+marchiniM -- 2017-11-22 14:50:26
+Added getEthnicity and getDegree to api.py
 
 siuR -- 2017-11-22 17:30:57
 Finish profile template
@@ -55,4 +61,7 @@ finished auth.py
 
 WongE -- 2017-11-23 22:01:46
 removed option to make flask app public
+
+marchiniM -- 2017-11-24 12:59:05
+added /favorites and /removeFave, created favorites.html, and added removeFave method to db.py
 
