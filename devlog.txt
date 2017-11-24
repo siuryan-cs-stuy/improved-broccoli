@@ -50,3 +50,6 @@ Add modals, charts to profile template
 WongE -- 2017-11-23 20:52:17
 added option to make flask app public
 
+WongE -- 2017-11-23 21:21:10
+finished auth.py
+
