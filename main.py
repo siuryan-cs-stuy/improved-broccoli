@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import api
 import config
+import sys
 
 app = Flask(__name__)
 
@@ -85,4 +86,8 @@ def results():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    if(len(sys.argv) > 1 and sys.argv[1] == "public"):
+        print "\nflask app is now public\n"
+        app.run(host='0.0.0.0')
+    else:
+        app.run()

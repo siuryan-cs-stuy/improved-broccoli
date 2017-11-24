@@ -47,3 +47,6 @@ Finish profile template
 siuR -- 2017-11-23 00:27:12
 Add modals, charts to profile template
 
+WongE -- 2017-11-23 20:52:17
+added option to make flask app public
+
