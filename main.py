@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import api
 import config
 import sys
+import auth
 
 app = Flask(__name__)
 
