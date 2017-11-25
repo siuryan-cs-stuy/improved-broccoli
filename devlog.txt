@@ -50,6 +50,9 @@ Added getEthnicity and getDegree to api.py
 siuR -- 2017-11-22 17:30:57
 Finish profile template
 
+chenK --2017-11-22 (forgot time)
+create some favorite table commands
+
 siuR -- 2017-11-23 00:27:12
 Add modals, charts to profile template
 
@@ -64,4 +67,7 @@ removed option to make flask app public
 
 marchiniM -- 2017-11-24 12:59:05
 added /favorites and /removeFave, created favorites.html, and added removeFave method to db.py
+
+chenK -- 2017-11-24 9:08:10
+finished db and tested 
 

@@ -21,8 +21,10 @@ def adduser(username,password):
     db = sqlite3.connect(f)
     c = db.cursor()
     if empty():
-         c.execute('INSERT INTO users VALUES("%d","%s", "%s");' %(result,username, password))
-         #need to finish
+         c.execute('INSERT INTO users VALUES(1,"%s", "%s");' %(username, password))
+         db.commit()
+         db.close()
+         return True
     if get_pass(username) is None:
         c.execute('SELECT max(id) FROM users;')
         result = c.fetchall()
@@ -30,15 +32,17 @@ def adduser(username,password):
         c.execute('INSERT INTO users VALUES("%d","%s", "%s");' %(result,username, password))
         db.commit()
         db.close()
-        return true
+        return True
     db.close()
-    return false
+    return False
 
 def empty():
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    
+    c.execute('SELECT * FROM users;')
+    result = c.fetchall()
+    return result == []
     
 def get_pass(username):
     f = "app.db"
@@ -57,21 +61,21 @@ def addfav(c_id, s_id):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('SELECT * FROM users WHERE college_id == "%d" AND user_id == "%d";'%(c_id, s_id))
+    c.execute('SELECT * FROM favorites WHERE college_id == "%d" AND user_id == "%d";'%(c_id, s_id))
     result = c.fetchall()
     if result == []:
         c.execute('INSERT INTO favorites VALUES("%d","%d");'%(c_id,s_id))
         db.commit()
         db.close()
-        return true
+        return True
     db.close()
-    return false
+    return False
 
 def getfavs(s_id):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('SELECT school_id FROM favorites WHERE student_id == "%d";' %(s_id))
+    c.execute('SELECT college_id FROM favorites WHERE user_id == "%d";' %(s_id))
     result = c.fetchall()
     db.close()
     return result
@@ -83,4 +87,9 @@ def removeFave(school_id, s_id):
     c.execute('DELETE FROM favorites WHERE college_id == "%d" AND user_id == "%d";' %(school_id, s_id))
     db.close()
 
-adduser
+addfav(12345,1)
+addfav(12345,2)
+addfav(12345,3)
+addfav(12346,1)
+addfav(12347,1)
+print getfavs(1)
