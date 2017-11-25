@@ -14,7 +14,7 @@ def getID(user):
     c.execute('SELECT id FROM users WHERE username = "%s";' %(user))
     result = c.fetchall()
     db.close()
-    return results[0][0]
+    return result[0][0]
 
 def adduser(username,password):
     f = "app.db"
@@ -93,3 +93,4 @@ addfav(12345,3)
 addfav(12346,1)
 addfav(12347,1)
 print getfavs(1)
+print getID('bob')
