@@ -71,3 +71,6 @@ added /favorites and /removeFave, created favorites.html, and added removeFave m
 chenK -- 2017-11-24 9:08:10
 finished db and tested 
 
+WongE -- 2017-11-27 00:45:51
+made a new branch for login
+
