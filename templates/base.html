@@ -27,10 +27,9 @@
         </ul>
       </div>
 
-      <!-- if not home page -->
-      {% if not homepage %}
       <div class="top-bar-right">
         <ul class="menu">
+          {% if not homepage %}
           <form name="search" action="{{ url_for('results') }}" method="GET">
             <div class="input-group">
               <li><input type="search" class="input-group-field" name="search" placeholder="Find a college..."></li>
@@ -39,12 +38,35 @@
               </div>
             </div>
           </form>
+          {% endif %}
         </ul>
       </div>
-      {% endif %}
+
+      <div class="top-bar-right">
+        <ul class="menu">
+          {% if logged_in() %}
+          <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          {% else %}
+          <li><a href="{{ url_for('login') }}">Login</a></li>
+          {% endif %}
+        </ul>
+      </div>
 
     </div>
 
+    <section class="flash">
+      <div class="grid-container">
+        {% for message in get_flashed_messages() %}
+        <div class="callout primary" data-closable>
+          <button class="close-button" aria-label="Close alert" type="button" data-close>
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p>{{ message }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    
     <section class="main">
       <div class="grid-container">
         <!-- CONTENT -->

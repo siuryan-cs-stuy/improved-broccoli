@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+
+<div class="grid-x grid-padding-x">
+  <div class="large-3 medium-2 cell"></div>
+  <div class="large-6 medium-8 cell jumbotron">
+    <div class="callout large align-middle">
+      <h1 class="text-center">Login</h1>
+      <br>
+      <ul class="menu align-center">
+        <form name="search" action="" method="POST">
+          <li><input type="text" name="username" placeholder="Username"></li>
+          <li><input type="password" name="password" placeholder="Password"></li>
+          <br>
+          <p class="text-center"><a href="{{ url_for('create') }}">Create an account!</a></p>
+          <li><input type="submit" class="button"></li>
+        </form>
+      </ul>
+    </div>
+  </div>
+  <div class="large-3 medium-2 cell"></div>
+</div>
+
+{% endblock %}

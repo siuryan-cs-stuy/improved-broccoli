@@ -7,10 +7,15 @@ def encrypt(string):
     return hashlib.sha224(string).hexdigest()
 
 def add_user(username,password):#creates a new account
-    db.adduser(username,encrypt(password))
+    return db.adduser(username,encrypt(password))
 
 def match(username,password):#checks if password matches username
+    print encrypt(password)
+    print db.get_pass(username)
     return encrypt(password) == db.get_pass(username)
+
+def user_exists(username):
+    return db.get_pass(username) is not None
 
 def logged_in():#checks to see of user is already logged in
     return 'username' in session

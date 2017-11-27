@@ -1,10 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import api
 import config
 import auth
 import os
 
 app = Flask(__name__)
+
+def make_secret_key():
+    return "test"
+    #return os.urandom(32)
+
 app.secret_key = make_secret_key()
 
 def format_currency(value):
@@ -15,14 +20,53 @@ def format_url(value):
 
 app.jinja_env.filters['currency'] = format_currency
 app.jinja_env.filters['external_url'] = format_url
-
-def make_secret_key():
-    return os.urandom(32)
+app.jinja_env.globals.update(logged_in = auth.logged_in)
 
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('index.html', homepage = True)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        # check if username exists
+        if auth.user_exists(username):
+            if auth.login(username, password):
+                flash('Logged in!')
+                return redirect('index')
+            else:
+                flash('Incorrect username/password combination.')
+        else:
+            flash('Username does not exist.')
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    if auth.logged_in():
+        auth.logout()
+        flash('Logged out.')
+    flash('Not logged in.')
+    return redirect('index')
+
+@app.route('/create', methods=['GET', 'POST'])
+def create():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password1 = request.form.get('password1')
+        password2 = request.form.get('password2')
+        if password1 == password2:
+            if auth.add_user(username, password1):
+                auth.login(username, password1)
+                flash('Welcome %s!' % username)
+                return redirect('index')
+            else:
+                flash('Username already exists.')
+        else:
+            flash('Passwords do not match.')
+    return render_template('create.html')
 
 @app.route('/profile')
 def profile():

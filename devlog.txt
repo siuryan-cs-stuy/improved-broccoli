@@ -74,3 +74,6 @@ finished db and tested
 WongE -- 2017-11-27 00:45:51
 made a new branch for login
 
+siuR -- 2017-11-27 11:46:51
+Add create, login templates and views
+

@@ -48,7 +48,7 @@ def get_pass(username):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('SELECT password FROM users WHERE username= "%s\";' %(username))
+    c.execute('SELECT password FROM users WHERE username= "%s";' %(username))
     result = c.fetchall()
     if result == []:
         db.close()
@@ -86,11 +86,3 @@ def removeFave(school_id, s_id):
     c = db.cursor()
     c.execute('DELETE FROM favorites WHERE college_id == "%d" AND user_id == "%d";' %(school_id, s_id))
     db.close()
-
-addfav(12345,1)
-addfav(12345,2)
-addfav(12345,3)
-addfav(12346,1)
-addfav(12347,1)
-print getfavs(1)
-print getID('bob')
