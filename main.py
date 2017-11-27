@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import api
 import config
 import auth
+import os
 
 app = Flask(__name__)
-app.secret_key = auth.make_secret_key()
+app.secret_key = make_secret_key()
 
 def format_currency(value):
     return "${:,}".format(value)
@@ -14,6 +15,9 @@ def format_url(value):
 
 app.jinja_env.filters['currency'] = format_currency
 app.jinja_env.filters['external_url'] = format_url
+
+def make_secret_key():
+    return os.urandom(32)
 
 @app.route('/')
 @app.route('/index')
