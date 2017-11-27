@@ -77,3 +77,12 @@ made a new branch for login
 siuR -- 2017-11-27 11:46:51
 Add create, login templates and views
 
+WongE -- 2017-11-27 14:29:30
+commented auth.py
+
+WongE -- 2017-11-27 14:38:05
+commented db.py
+
+WongE -- 2017-11-27 14:45:44
+commented api.py
+
