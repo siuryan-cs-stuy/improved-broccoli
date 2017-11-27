@@ -48,7 +48,8 @@ def logout():
     if auth.logged_in():
         auth.logout()
         flash('Logged out.')
-    flash('Not logged in.')
+    else:
+        flash('Not logged in.')
     return redirect('index')
 
 @app.route('/create', methods=['GET', 'POST'])
