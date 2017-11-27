@@ -24,6 +24,7 @@ def getId (schoolName):
             idList.append(school[u'id'])
         return idList
 
+#returns the name of the college given its id
 def getName (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
@@ -31,6 +32,7 @@ def getName (schoolId):
     school = json.loads(data)
     return school[u'results'][0][u'school'][u'name']
 
+#returns a link to the college's website given its id
 def getUrl (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
@@ -38,6 +40,7 @@ def getUrl (schoolId):
     school = json.loads(data)
     return school[u'results'][0][u'school'][u'school_url']
 
+#returns a link to a price calulator that estimates the price for attending the college. requires id
 def getPriceUrl (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
@@ -45,6 +48,7 @@ def getPriceUrl (schoolId):
     school = json.loads(data)
     return school[u'results'][0][u'school'][u'price_calculator_url']
 
+#returns "women" if the school is women only, does the same thing for men, returns no if the school both men and women. requires school id
 def getGender (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
@@ -57,6 +61,7 @@ def getGender (schoolId):
     else:
         return "No"
 
+#returns the city the college is in given its id
 def getCity (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
@@ -64,6 +69,7 @@ def getCity (schoolId):
     school = json.loads(data)
     return school[u'results'][0][u'school'][u'city']
 
+#returns the state the college is in given its id
 def getState (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
@@ -71,6 +77,7 @@ def getState (schoolId):
     school = json.loads(data)
     return school[u'results'][0][u'school'][u'state']
 
+#returns the admission rate of the college(in a string) given its id
 def getAdmRate (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
@@ -104,6 +111,7 @@ def getAct (schoolId):
     actInfo.append(school[u'results'][0][u'2015'][u'admissions'][u'act_scores'][u'midpoint'][u'writing'])
     return actInfo
 
+#returns information about the cost for attending the college given its id
 def getPrice (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
@@ -111,13 +119,14 @@ def getPrice (schoolId):
     school = json.loads(data)
     return school[u'results'][0][u'2015'][u'cost'][u'avg_net_price'][u'overall']
 
+#returns the rate of getting a pell grant for a college given its id
 def getPellGrant (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
     data = r.text
     school = json.loads(data)
     return str(school[u'results'][0][u'2015'][u'aid'][u'pell_grant_rate'] * 100) + '%'
-
+#returns infomation about debt for the college given its id
 def getDebt (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
@@ -125,7 +134,7 @@ def getDebt (schoolId):
     school = json.loads(data)
     return int(school[u'results'][0][u'2015'][u'aid'][u'median_debt_suppressed'][u'overall'])
 
-
+#returns the graduation rate of a college given its id
 def getCompletion (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
@@ -163,6 +172,7 @@ def getDegrees (schoolId):
             degrees[degree] = programs[degree] * 100
     return degrees
 
+#returns the population of the college given its id
 def getSize (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
     r = requests.get(url)

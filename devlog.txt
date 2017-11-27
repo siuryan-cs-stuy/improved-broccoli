@@ -38,6 +38,9 @@ Added getDebt, getPellGrant, and getCompletion to api.py
 siuR -- 2017-11-21 21:33:22
 Add JS chart to profile page
 
+marchiniM -- 2017-11-27 14:41:50
+Wrote readme.md
+
 siuR -- 2017-11-22 10:36:04
 Wrote temp formula for graph colors
 
@@ -76,4 +79,13 @@ made a new branch for login
 
 siuR -- 2017-11-27 11:46:51
 Add create, login templates and views
+
+WongE -- 2017-11-27 14:29:30
+commented auth.py
+
+WongE -- 2017-11-27 14:38:05
+commented db.py
+
+WongE -- 2017-11-27 14:45:44
+commented api.py
 

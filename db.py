@@ -7,6 +7,7 @@ c.execute('CREATE TABLE IF NOT EXISTS favorites (college_id INTEGER, user_id INT
 c.execute('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY,username TEXT, password TEXT);')
 db.close()
 
+#returns the id of the user given the username
 def getID(user):
     f = "app.db"
     db = sqlite3.connect(f)
@@ -16,6 +17,9 @@ def getID(user):
     db.close()
     return result[0][0]
 
+#adds the user to the database
+#do NOT use this function since the password is not encrypted
+#to add a user with encryption look at the add_user(username,password) method in auth
 def adduser(username,password):
     f = "app.db"
     db = sqlite3.connect(f)
@@ -36,6 +40,7 @@ def adduser(username,password):
     db.close()
     return False
 
+#checks if the there are any existing users in the database
 def empty():
     f = "app.db"
     db = sqlite3.connect(f)
@@ -43,7 +48,8 @@ def empty():
     c.execute('SELECT * FROM users;')
     result = c.fetchall()
     return result == []
-    
+
+#returns the password of the user    
 def get_pass(username):
     f = "app.db"
     db = sqlite3.connect(f)
@@ -56,7 +62,9 @@ def get_pass(username):
     else:
         db.close()
         return result[0][0]
-    
+   
+#set a college as a favorite of the user
+#accepts c_id as college id and s_id as user id which you can get with getID(<username>)
 def addfav(c_id, s_id):
     f = "app.db"
     db = sqlite3.connect(f)
@@ -71,6 +79,8 @@ def addfav(c_id, s_id):
     db.close()
     return False
 
+#returns a dictionary of the user's favorite collegs
+#s_id is user id
 def getfavs(s_id):
     f = "app.db"
     db = sqlite3.connect(f)
@@ -80,6 +90,8 @@ def getfavs(s_id):
     db.close()
     return result[0]
 
+#removes a school from a user's favorite list
+#removeFave(<college id>,<user id>)
 def removeFave(school_id, s_id):
     f = "app.db"
     db = sqlite3.connect(f)
