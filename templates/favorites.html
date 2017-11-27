@@ -12,18 +12,18 @@ Favorites
       <div class="large-2 medium-1 cell"></div>
 
       <div class="large-8 medium-10 cell">
-        <h1 class="text-center">My Favorites</h1>
+        <h1 class="text-center">{{ username }}'s Favorites</h1>
         <table>
-	  <tr>
+	        <tr>
             <td>Name</td>
             <td>Link</td>
-	    <td>Remove Favorite</td>
+	          <td>Remove Favorite</td>
           </tr>
 	  {% for id in schools %}
 	  <tr>
 	    <td>{{ schools[id] }}</td>
             <td><a class="button button-no-margin" href="{{ url_for('profile', school_id = id) }}">View</a></td>
-	    <td><a class="button button-no-margin" href="{{ url_for('removeFave', school_id = id) }}">Remove</a></td>
+	          <td><a class="button button-no-margin" href="{{ url_for('toggle_fave', school_id = id) }}">Remove</a></td>
           </tr>
 	  {% endfor %}
         </table>

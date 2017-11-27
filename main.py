@@ -3,6 +3,7 @@ import api
 import config
 import auth
 import os
+import db
 
 app = Flask(__name__)
 
@@ -25,7 +26,7 @@ app.jinja_env.globals.update(logged_in = auth.logged_in)
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', homepage = True)
+    return render_template('index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -35,7 +36,7 @@ def login():
         # check if username exists
         if auth.user_exists(username):
             if auth.login(username, password):
-                flash('Logged in!')
+                flash('Welcome %s!' % username)
                 return redirect('index')
             else:
                 flash('Incorrect username/password combination.')
@@ -116,7 +117,10 @@ def profile():
     #college['degrees_labels'] = ['Computer Science', 'Engineering', 'Mathematics', 'Science', 'Social Science', 'English', 'History', 'Other']
     #college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.03, 0.01, 0.01]
 
-    return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY)
+    s_id = db.getID(session['username'])
+    favorited = school_id in db.getfavs(s_id)
+
+    return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY, search_page = True, favorited = favorited)
 
 #renders results.html and passes list of ids and list of names 
 @app.route('/results')
@@ -132,27 +136,33 @@ def results():
         schools[school_id] = api.getName(school_id)
         school_locations[school_id] = api.getCity(school_id) + ', ' + api.getState(school_id)
 
-    return render_template('results.html', schools = schools, school_locations = school_locations)
+    return render_template('results.html', schools = schools, school_locations = school_locations, search_page = True)
 
 @app.route('/favorites')
 def favorites():
     faveList = []
-    if session['username'] != None:
+    if auth.logged_in():
         s_id = db.getID(session['username'])
         for school in db.getfavs(s_id):
-            faveList.append(school[0])
+            faveList.append(school)
         schools = {}
         for school_id in faveList:
             schools[school_id] = api.getName(school_id)
-        return render_template('favorites.html', schools = schools)
+        return render_template('favorites.html', schools = schools, search_page = True, username = session['username'])
+    else:
+        flash('You must be logged in to view this page.')
+        return redirect('index')
 
-@app.route('/removeFave')
-def removeFave():
-   school_id = request.form('school_id')
+@app.route('/toggle_fave', methods=['GET', 'POST'])
+def toggle_fave():
+   school_id = int(request.form.get('favorite'))
    s_id = db.getID(session['username'])
-   db.removeFave(school_id, s_id)
-   return redirect(url_for('favorites'))
-        
+   if school_id in db.getfavs(s_id):
+       db.removeFave(school_id, s_id)
+   else:
+       db.addfav(school_id, s_id)
+   return redirect(url_for('profile', school_id = school_id))
+
 
 if __name__ == '__main__':
     app.debug = True

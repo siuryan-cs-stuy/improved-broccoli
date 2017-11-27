@@ -24,12 +24,15 @@
         <ul class="menu">
           <li class="menu-text">Naviance II</li>
           <li><a href="{{ url_for('index') }}">Home</a></li>
+          {% if logged_in() %}
+          <li><a href="{{ url_for('favorites') }}">Favorites</a></li>
+          {% endif %}
         </ul>
       </div>
 
       <div class="top-bar-right">
         <ul class="menu">
-          {% if not homepage %}
+          {% if search_page %}
           <form name="search" action="{{ url_for('results') }}" method="GET">
             <div class="input-group">
               <li><input type="search" class="input-group-field" name="search" placeholder="Find a college..."></li>

@@ -78,7 +78,7 @@ def getfavs(s_id):
     c.execute('SELECT college_id FROM favorites WHERE user_id == "%d";' %(s_id))
     result = c.fetchall()
     db.close()
-    return result
+    return result[0]
 
 def removeFave(school_id, s_id):
     f = "app.db"

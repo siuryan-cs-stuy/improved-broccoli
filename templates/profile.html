@@ -21,6 +21,22 @@
 <div class="grid-x grid-padding-x">
   <div class="large-12 cell">
     <h1>{{ college.name }}</h1>
+    <p>Favorite</p>
+    <div class="switch large">
+      <form action="{{ url_for('toggle_fave') }}" method="POST">
+        <input class="switch-input" id="yes-no" type="checkbox" name="favorite" value="{{ college.school_id }}"onclick="this.form.submit();">
+        <label class="switch-paddle" for="yes-no">
+          <span class="show-for-sr">Favorite</span>
+          {% if favorited %}
+          <span class="switch-active" aria-hidden="true">Yes</span>
+          <span class="switch-inactive" aria-hidden="true">No</span>
+          {% else %}
+          <span class="switch-inactive" aria-hidden="true">Yes</span>
+          <span class="switch-active" aria-hidden="true">No</span>
+          {% endif %}
+        </label>
+      </form>
+    </div>
   </div>
 </div>
 
