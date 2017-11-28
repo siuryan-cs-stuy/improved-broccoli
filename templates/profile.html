@@ -20,6 +20,7 @@
 {% block content %}
 <div class="grid-x grid-padding-x">
   <div class="shrink cell">
+    {% if canFavorite %}
     <div class="switch large" id="favorite-switch">
       <form action="" method="POST">
         <input class="switch-input" id="yes-no" type="checkbox" name="favorite" value="{{ college.school_id }}" onclick="this.form.submit();" {% if favorited %}checked{% endif %}>
@@ -30,6 +31,7 @@
         </label>
       </form>
     </div>
+    {% endif %}
   </div>
   <div class="auto cell">
     <h1>{{ college.name }}</h1>

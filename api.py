@@ -14,6 +14,9 @@ def getId (schoolName):
     schools = json.loads(data)
     #print schools
     #print schools[u'results'][0][u'school'][u'name']
+    if len(schools[u'results']) == 0:
+        idList = []
+        return idList
     if (schools[u'results'][0][u'school'][u'name']) == schoolName:
         idList = []
         idList.append(schools[u'results'][0][u'id'])

@@ -121,16 +121,22 @@ def profile():
     #college['degrees_labels'] = ['Computer Science', 'Engineering', 'Mathematics', 'Science', 'Social Science', 'English', 'History', 'Other']
     #college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.03, 0.01, 0.01]
 
-    s_id = db.getID(session['username'])
-    favorited = db.school_in_favs(int(school_id), s_id)
-
-    return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY, search_page = True, favorited = favorited)
+    canFavorite = auth.logged_in()
+    favorited = False
+    if canFavorite:
+        s_id = db.getID(session['username'])
+        favorited = db.school_in_favs(int(school_id), s_id)
+        
+    return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY, search_page = True, canFavorite = canFavorite, favorited = favorited)
 
 #renders results.html and passes list of ids and list of names 
 @app.route('/results')
 def results():
     query = request.args.get('search')
     ids = api.getId(query)
+    if len(ids) == 0:
+        return render_template('results.html', noMatch = True)
+                        
     if len(ids) == 1:
         return redirect(url_for('profile', school_id = ids[0]))
 
@@ -140,7 +146,7 @@ def results():
         schools[school_id] = api.getName(school_id)
         school_locations[school_id] = api.getCity(school_id) + ', ' + api.getState(school_id)
 
-    return render_template('results.html', schools = schools, school_locations = school_locations, search_page = True)
+    return render_template('results.html', schools = schools, school_locations = school_locations, search_page = True, noMatch = False)
 
 @app.route('/favorites')
 def favorites():
@@ -152,7 +158,9 @@ def favorites():
         schools = {}
         for school_id in faveList:
             schools[school_id] = api.getName(school_id)
-        return render_template('favorites.html', schools = schools, search_page = True, username = session['username'])
+        if len(schools) == 0:
+            return render_template('favorites.html', noFaves = True, username = session['username'].capitalize())
+        return render_template('favorites.html', schools = schools, search_page = True, username = session['username'].capitalize(), noFaves = False)
     else:
         flash('You must be logged in to view this page.')
         return redirect('index')
