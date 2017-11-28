@@ -26,6 +26,16 @@ GOOGLE_API_KEY = <API_KEY_FROM_STEP_2>
 ```
 
 ### Running the Application
-5. In order to run this app, your computer will need to have Python 2.7 and the Flask module.  To install Flask, use `pip install Flask` in the terminal.
-6. In the root directory of the application, run `python main.py`.
-5. Open a web browser and go to `localhost:5000`. Congratulations, you should be running Naviance II!
+5. In order to run this app, you will need virtualenv, Python 2.7, the `Flask` module, and the `requests` and `requests-cache` modules. 
+```
+$ sudo pip install virtualenv
+$ cd <PATH_TO_APPLICATION_ROOT>
+$ virtualenv venv
+$ . venv/bin/activate
+$ pip install Flask
+$ pip install requests
+$ pip install requests-cache
+```
+6. In the root directory of the application, run `$ python main.py`.
+7. Open a web browser and go to `localhost:5000`. Congratulations, you should be running Naviance II!
+8. When finished, the virtual environment can be deactivated `$ deactivate`.
