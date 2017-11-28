@@ -57,3 +57,7 @@ footer {
 .card img {
     min-height: 200px;
 }
+
+#favorite-switch {
+    padding-top: 20%;
+}

@@ -86,7 +86,7 @@ def getAdmRate (schoolId):
     r = requests.get(url)
     data = r.text
     school = json.loads(data)
-    return str(school[u'results'][0][u'2015'][u'admissions'][u'admission_rate'][u'overall'] * 100) + '%'
+    return school[u'results'][0][u'2015'][u'admissions'][u'admission_rate'][u'overall']
 
 #returns list of [average score, median reading, median math, median writing]
 def getSat (schoolId):
@@ -128,7 +128,8 @@ def getPellGrant (schoolId):
     r = requests.get(url)
     data = r.text
     school = json.loads(data)
-    return str(school[u'results'][0][u'2015'][u'aid'][u'pell_grant_rate'] * 100) + '%'
+    return school[u'results'][0][u'2015'][u'aid'][u'pell_grant_rate']
+
 #returns infomation about debt for the college given its id
 def getDebt (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(config.COLLEGE_API_KEY, schoolId)
@@ -143,7 +144,7 @@ def getCompletion (schoolId):
     r = requests.get(url)
     data = r.text
     school = json.loads(data)
-    return str(school[u'results'][0][u'2015'][u'completion'][u'rate_suppressed'][u'overall'] * 100) + '%'
+    return school[u'results'][0][u'2015'][u'completion'][u'rate_suppressed'][u'overall']
 
 #list format native hawiian pacific islander, black, asian, unknown, white, mixed race, hispanic, alaskan/native american
 def getEthnicity (schoolId):

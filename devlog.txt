@@ -95,3 +95,6 @@ Incorporate favorites into app
 chenK -- 2017-11-27 21:24:45
 worked on google maps embed
 
+siuR -- 2017-11-28 10:05:43
+Error handling for null API data
+

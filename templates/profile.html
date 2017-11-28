@@ -19,8 +19,8 @@
 
 {% block content %}
 <div class="grid-x grid-padding-x">
+  {% if logged_in() %}
   <div class="shrink cell">
-    {% if canFavorite %}
     <div class="switch large" id="favorite-switch">
       <form action="" method="POST">
         <input class="switch-input" id="yes-no" type="checkbox" name="favorite" value="{{ college.school_id }}" onclick="this.form.submit();" {% if favorited %}checked{% endif %}>
@@ -31,8 +31,8 @@
         </label>
       </form>
     </div>
-    {% endif %}
   </div>
+  {% endif %}
   <div class="auto cell">
     <h1>{{ college.name }}</h1>
   </div>
@@ -53,14 +53,12 @@
       {% else %}
       <iframe src="https://www.google.com/maps/embed/v1/place?key={{ GOOGLE_API_KEY }}&q={{ college.name }},{{ college.city }}+{{ college.state }}" frameborder="0" allowfullscreen>
       </iframe>
-      (% endif %}
-
+      {% endif %}
     </div>
     <div class="expanded button-group">
-      <!-- need to fill in links -->
-      <a href = class="button">Restaurants</a>
-      <a href = class="button">Libraries</a>
-      <a href = class="button">Parks</a>
+      <a href="{{ url_for('profile', school_id = college.school_id, place = 'Restaurants') }}" class="button">Restaurants</a>
+      <a href="{{ url_for('profile', school_id = college.school_id, place = 'Libraries') }}" class="button">Libraries</a>
+      <a href="{{ url_for('profile', school_id = college.school_id, place = 'Parks') }}" class="button">Parks</a>
     </div>
   </div>
   <div class="large-6 medium-6 cell">
@@ -71,8 +69,8 @@
       <tr><td>Average SAT</td><td>{{ college.satInfo[0] | int }}</td></tr>
       <tr><td>Average ACT</td><td>{{ college.actInfo[0] | int }}</td></tr>
       <tr><td>Undergraduate Enrollment</td><td>{{ college.size }}</td></tr>
-      <tr><td>Acceptance Rate</td><td>{{ college.admRate }}</td></tr>
-      <tr><td>Completion Rate</td><td>{{ college.completion }}</td></tr>
+      <tr><td>Acceptance Rate</td><td>{{ college.admRate | format_percent }}</td></tr>
+      <tr><td>Completion Rate</td><td>{{ college.completion | format_percent }}</td></tr>
       <tr><td>Gender Only</td><td>{{ college.gender }}</td></tr>
     </table>
   </div>
@@ -86,7 +84,7 @@
       <tr><td>Net Price Calculator</td><td><a href="{{ college.netPriceSite | external_url }}" target="_blank">{{ college.netPriceSite }}</a></td></tr>
       <tr><td>Average Tuition</td><td>{{ college.avgPrice | currency }}</td></tr>
       <tr><td>Median Debt</td><td>{{ college.debt | currency }}</td></tr>
-      <tr><td>Pell Grant Rate</td><td>{{ college.pell }}</td></tr>
+      <tr><td>Pell Grant Rate</td><td>{{ college.pell | format_percent }}</td></tr>
     </table>
   </div>
 

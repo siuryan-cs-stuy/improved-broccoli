@@ -19,8 +19,14 @@ def format_currency(value):
 def format_url(value):
     return ''.join(['http://', value])
 
+def format_percent(value):
+    if value:
+        return str(value * 100) + '%'
+    return 'N/A'
+
 app.jinja_env.filters['currency'] = format_currency
 app.jinja_env.filters['external_url'] = format_url
+app.jinja_env.filters['format_percent'] = format_percent
 app.jinja_env.globals.update(logged_in = auth.logged_in)
 
 @app.route('/')
@@ -73,9 +79,9 @@ def create():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     school_id = request.args.get('school_id')
-    place = request.args.get('place')
-    if request.method == 'GET':
-        return redirect(url_for('profile', school_id = school_id place = place))
+    place = None
+    if 'place' in request.args:
+        place = request.args.get('place')
 
     if request.method == 'POST':
         return redirect(url_for('toggle_fave', school_id = school_id))
@@ -124,20 +130,13 @@ def profile():
     #college['degrees_labels'] = ['Computer Science', 'Engineering', 'Mathematics', 'Science', 'Social Science', 'English', 'History', 'Other']
     #college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.03, 0.01, 0.01]
 
-<<<<<<< HEAD
-    canFavorite = auth.logged_in()
-    favorited = False
-    if canFavorite:
+    favorited = None
+    if auth.logged_in():
         s_id = db.getID(session['username'])
         favorited = db.school_in_favs(int(school_id), s_id)
         
-    return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY, search_page = True, canFavorite = canFavorite, favorited = favorited)
-=======
-    s_id = db.getID(session['username'])
-    favorited = db.school_in_favs(int(school_id), s_id)
-
     return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY, search_page = True, favorited = favorited, place = place)
->>>>>>> 58e16147c7e4f9fa04915f1fd4537ced9b23fbf6
+
 
 #renders results.html and passes list of ids and list of names 
 @app.route('/results')
