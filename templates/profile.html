@@ -66,8 +66,16 @@
     <table>
       <tr><td>Website</td><td><a href="{{ college.website | external_url }}" target="_blank">{{ college.website }}</a></td></tr>
       <tr><td>Location</td><td>{{ college.city }}, {{ college.state }}</td></tr>
-      <tr><td>Average SAT</td><td>{{ college.satInfo[0] | int }}</td></tr>
-      <tr><td>Average ACT</td><td>{{ college.actInfo[0] | int }}</td></tr>
+      {% if college.satInfo | int == 0 %}
+      <tr><td>Average SAT</td><td>N/A</td></tr>
+      {% else %}
+      <tr><td>Average SAT</td><td>{{ college.satInfo | int }}</td></tr>
+      {% endif %}
+      {% if college.actInfo | int == 0 %}     
+      <tr><td>Average SAT</td><td>N/A</td></tr>
+      {% else %}
+      <tr><td>Average ACT</td><td>{{ college.actInfo | int }}</td></tr>
+      {% endif %}
       <tr><td>Undergraduate Enrollment</td><td>{{ college.size }}</td></tr>
       <tr><td>Acceptance Rate</td><td>{{ college.admRate | format_percent }}</td></tr>
       <tr><td>Completion Rate</td><td>{{ college.completion | format_percent }}</td></tr>

@@ -99,9 +99,12 @@ def profile():
     college['gender'] = api.getGender(school_id)
     college['completion'] = api.getCompletion(school_id)
     college['admRate'] = api.getAdmRate(school_id)
-    #satInfo and actInfo are lists of overall and section averages
     college['satInfo'] = api.getSat(school_id)
+    #if college['satInfo'] == 0:
+	#college['satInfo'] = 'N/A'
     college['actInfo'] = api.getAct(school_id)
+    #if college['actInfo'] == 0:
+	#college['actInfo'] = 'N/A'
     college['size'] = api.getSize(school_id)
     college['avgPrice'] = api.getPrice(school_id)
     college['debt'] = api.getDebt(school_id)
