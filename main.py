@@ -30,11 +30,13 @@ app.jinja_env.filters['currency'] = format_currency
 app.jinja_env.filters['external_url'] = format_url
 app.jinja_env.filters['format_percent'] = format_percent
 app.jinja_env.globals.update(logged_in = auth.logged_in)
+
 #index:NavianceII home page. Renders index.html
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('index.html')
+
 #the login page which redirects to index after logging in. Renders login.html
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -51,6 +53,7 @@ def login():
         else:
             flash('Username does not exist.')
     return render_template('login.html')
+
 #logging out redirects to index
 @app.route('/logout')
 def logout():
@@ -60,6 +63,7 @@ def logout():
     else:
         flash('Not logged in.')
     return redirect('index')
+
 #sign up page renders create.html and redirects to index or flash incorrect passor username if it does not match the information stored in the database
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -77,6 +81,7 @@ def create():
         else:
             flash('Passwords do not match.')
     return render_template('create.html')
+
 #profile renders profile.html and displays the selected college and all relevant infomation with a google map of the location
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -100,10 +105,10 @@ def profile():
     college['admRate'] = api.getAdmRate(school_id)
     college['satInfo'] = api.getSat(school_id)
     #if college['satInfo'] == 0:
-	#college['satInfo'] = 'N/A'
+        #college['satInfo'] = 'N/A'
     college['actInfo'] = api.getAct(school_id)
     #if college['actInfo'] == 0:
-	#college['actInfo'] = 'N/A'
+        #college['actInfo'] = 'N/A'
     college['size'] = api.getSize(school_id)
     college['avgPrice'] = api.getPrice(school_id)
     college['debt'] = api.getDebt(school_id)
@@ -138,7 +143,6 @@ def profile():
         
     return render_template('profile.html', college = college, GOOGLE_API_KEY = api.GOOGLE_API_KEY, search_page = True, favorited = favorited, place = place)
 
-
 #renders results.html and passes list of ids and list of names 
 @app.route('/results')
 def results():
@@ -168,9 +172,8 @@ def favorites():
         schools = {}
         for school_id in faveList:
             schools[school_id] = api.getName(school_id)
-        if len(schools) == 0:
-            return render_template('favorites.html', noFaves = True, username = session['username'].capitalize())
-        return render_template('favorites.html', schools = schools, search_page = True, username = session['username'].capitalize(), noFaves = False)
+        noFaves = (len(schools) == 0)
+        return render_template('favorites.html', schools = schools, search_page = True, username = session['username'].capitalize(), noFaves = noFaves)
     else:
         flash('You must be logged in to view this page.')
         return redirect('index')
