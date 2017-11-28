@@ -9,7 +9,7 @@ import requests, requests_cache
 app = Flask(__name__)
 
 requests_cache.install_cache('college_api_cache', backend='sqlite', expire_after=600)
-
+#creates secret key for session encryption
 def make_secret_key():
     return "test"
     #return os.urandom(32)
