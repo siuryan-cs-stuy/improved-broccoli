@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+<script>
+  window.chartConfig = {
+    degrees_labels: {{ college.degrees_labels | safe }},
+    degrees_data: {{ college.degrees_data | safe }},
+    eth_labels: {{ college.eth_labels | safe }},
+    eth_data: {{ college.eth_data | safe }},
+  }
+</script>
+<script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+{% endblock %}
+
+{% block title %}
+{{ college.name }}
+{% endblock %}
+
+{% block content %}
+<div class="grid-x grid-padding-x">
+  <div class="large-12 cell">
+    <h1>{{ college.name }}</h1>
+  </div>
+</div>
+
+<div class="grid-x grid-padding-x">
+  <div class="large-6 medium-6 cell">
+    <div class="responsive-embed">
+      <iframe src="https://www.google.com/maps/embed/v1/place?key={{ GOOGLE_API_KEY }}&q={{ college.name }},{{ college.city }}+{{ college.state }}" frameborder="0" allowfullscreen>
+      </iframe>
+    </div>
+    <div class="expanded button-group">
+      <a class="button">Restaurants</a>
+      <a class="button">Libraries</a>
+      <a class="button">Parks</a>
+    </div>
+  </div>
+  <div class="large-6 medium-6 cell">
+    <strong>At a Glance (2015)</strong>
+    <table>
+      <tr><td>Website</td><td><a href="{{ college.website | external_url }}" target="_blank">{{ college.website }}</a></td></tr>
+      <tr><td>Location</td><td>{{ college.city }}, {{ college.state }}</td></tr>
+      <tr><td>Average SAT</td><td>{{ college.satInfo[0] | int }}</td></tr>
+      <tr><td>Average ACT</td><td>{{ college.actInfo[0] | int }}</td></tr>
+      <tr><td>Undergraduate Enrollment</td><td>{{ college.size }}</td></tr>
+      <tr><td>Acceptance Rate</td><td>{{ college.admRate }}</td></tr>
+      <tr><td>Completion Rate</td><td>{{ college.completion }}</td></tr>
+      <tr><td>Gender Only</td><td>{{ college.gender }}</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="grid-x grid-padding-x">
+  <div class="large-6 cell callout">
+    <h6>Financial Aid</h6>
+    <p><a href="https://collegecost.ed.gov/netpricecenter.aspx" target="_blank">Net Price</a> is the amount that a student pays to attend an institution in a single academic year AFTER subtracting scholarships and grants the student receives. Net price calculators are available on a college’s or university’s website and allow prospective students to enter information about themselves to find out what students like them paid to attend the institution in the previous year, taking grants and scholarship aid into account.</p>
+    <table>
+      <tr><td>Net Price Calculator</td><td><a href="{{ college.netPriceSite | external_url }}" target="_blank">{{ college.netPriceSite }}</a></td></tr>
+      <tr><td>Average Tuition</td><td>{{ college.avgPrice | currency }}</td></tr>
+      <tr><td>Median Debt</td><td>{{ college.debt | currency }}</td></tr>
+      <tr><td>Pell Grant Rate</td><td>{{ college.pell }}</td></tr>
+    </table>
+  </div>
+
+  <div class="large-6 cell callout">
+    <div class="grid-x grid-padding-x">
+      <div class="large-12 cell">
+        <h6>Charts</h6>
+      </div>
+      <div class="large-6 medium-6 cell">
+        <div class="card">
+          <div class="card-divider">
+            Degrees
+          </div>
+          <img src="{{ url_for('static', filename='img/degrees.jpg') }}">
+          <div class="card-section">
+            <button class="button expanded" data-open="degreesModal">View</button>
+          </div>
+        </div>
+      </div>
+      <div class="large-6 medium-6 cell">
+        <div class="card">
+          <div class="card-divider">
+            Ethnicities
+          </div>
+          <img src="{{ url_for('static', filename='img/ethnicities.png') }}">
+          <div class="card-section">
+            <button class="button expanded" data-open="ethnicitiesModal">View</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block modals %}
+
+<div class="large reveal" id="degreesModal" data-reveal>
+  <h6>Degrees</h6>
+  <canvas id="degreesCanvas"></canvas>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="large reveal" id="ethnicitiesModal" data-reveal>
+  <h6>Ethnicities</h6>
+  <canvas id="ethnicitiesCanvas"></canvas>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{% endblock %}
