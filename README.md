@@ -23,7 +23,7 @@ GOOGLE_API_KEY = <API_KEY_FROM_STEP_2>
 ```
 
 ### Installing and Running the Application
-4. Clone this repository with `git clone https://github.com/siuryan-cs-stuy/naviance2.0`.
+4. Clone this repository with `git clone https://github.com/siuryan-cs-stuy/naviance2.0.git`.
 5. In order to run this app, your computer will need to have Python 2.7 and the Flask module.  To install Flask, use `pip install Flask` in the terminal.
 6. In the root directory of the application, run `python main.py`.
-5. Open a web browser and go to [localhost](localhost:5000). Congratulations, you should be running Naviance II!
+5. Open a web browser and go to `localhost:5000`. Congratulations, you should be running Naviance II!
