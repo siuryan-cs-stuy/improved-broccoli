@@ -30,12 +30,12 @@ app.jinja_env.filters['currency'] = format_currency
 app.jinja_env.filters['external_url'] = format_url
 app.jinja_env.filters['format_percent'] = format_percent
 app.jinja_env.globals.update(logged_in = auth.logged_in)
-
+#index:NavianceII home page. Renders index.html
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('index.html')
-
+#the login page which redirects to index after logging in. Renders login.html
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -51,7 +51,7 @@ def login():
         else:
             flash('Username does not exist.')
     return render_template('login.html')
-
+#logging out redirects to index
 @app.route('/logout')
 def logout():
     if auth.logged_in():
@@ -60,7 +60,7 @@ def logout():
     else:
         flash('Not logged in.')
     return redirect('index')
-
+#sign up page renders create.html and redirects to index or flash incorrect passor username if it does not match the information stored in the database
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     if request.method == 'POST':
@@ -77,7 +77,7 @@ def create():
         else:
             flash('Passwords do not match.')
     return render_template('create.html')
-
+#profile renders profile.html and displays the selected college and all relevant infomation with a google map of the location
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     school_id = request.args.get('school_id')
@@ -98,9 +98,12 @@ def profile():
     college['gender'] = api.getGender(school_id)
     college['completion'] = api.getCompletion(school_id)
     college['admRate'] = api.getAdmRate(school_id)
-    #satInfo and actInfo are lists of overall and section averages
     college['satInfo'] = api.getSat(school_id)
+    #if college['satInfo'] == 0:
+	#college['satInfo'] = 'N/A'
     college['actInfo'] = api.getAct(school_id)
+    #if college['actInfo'] == 0:
+	#college['actInfo'] = 'N/A'
     college['size'] = api.getSize(school_id)
     college['avgPrice'] = api.getPrice(school_id)
     college['debt'] = api.getDebt(school_id)
@@ -128,10 +131,6 @@ def profile():
     college['eth_labels'] = eth_labels
     college['eth_data'] = eth_data
 
-    #testing
-    #college['degrees_labels'] = ['Computer Science', 'Engineering', 'Mathematics', 'Science', 'Social Science', 'English', 'History', 'Other']
-    #college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.03, 0.01, 0.01]
-
     favorited = None
     if auth.logged_in():
         s_id = db.getID(session['username'])
@@ -158,6 +157,7 @@ def results():
 
     return render_template('results.html', schools = schools, school_locations = school_locations, search_page = True, noMatch = noMatch)
 
+#renders favorites.html and displays all the favorited colleges
 @app.route('/favorites')
 def favorites():
     faveList = []
@@ -175,6 +175,7 @@ def favorites():
         flash('You must be logged in to view this page.')
         return redirect('index')
 
+#toggle_fave redirects to profile and allows you to add or remove a college from favorites
 @app.route('/toggle_fave')
 def toggle_fave():
     school_id = int(request.args.get('school_id'))

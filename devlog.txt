@@ -101,6 +101,11 @@ Error handling for null API data
 siuR -- 2017-11-28 10:45:10
 Add request caching
 
+chenK -- 2017-11-28 14:20:52
+commented main.py
+
+marchiniM -- 2017-11-28 15:43:21
+Fixed average SAT/ACT equals 0 when there is no info
+
 siuR -- 2017-11-28 15:07:39
 Replace config.py with config.json and fix minor bugs
-

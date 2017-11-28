@@ -94,31 +94,22 @@ def getAdmRate (schoolId):
     school = json.loads(data)
     return school[u'results'][0][u'2015'][u'admissions'][u'admission_rate'][u'overall']
 
-#returns list of [average score, median reading, median math, median writing]
+#returns average SAT score
 def getSat (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
     data = r.text
     school = json.loads(data)
-    satInfo = []
-    satInfo.append(school[u'results'][0][u'2015'][u'admissions'][u'sat_scores'][u'average'][u'overall'])
-    satInfo.append(school[u'results'][0][u'2015'][u'admissions'][u'sat_scores'][u'midpoint'][u'critical_reading'])
-    satInfo.append(school[u'results'][0][u'2015'][u'admissions'][u'sat_scores'][u'midpoint'][u'math'])
-    satInfo.append(school[u'results'][0][u'2015'][u'admissions'][u'sat_scores'][u'midpoint'][u'writing'])
-    return satInfo
+    return school[u'results'][0][u'2015'][u'admissions'][u'sat_scores'][u'average'][u'overall']
 
-#returns list of [mean cumulative, mean english, mean math, mean writing]
+#returns average ACT score
 def getAct (schoolId):
     url = "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=%s&id=%s" %(COLLEGE_API_KEY, schoolId)
     r = requests.get(url)
     data = r.text
     school = json.loads(data)
-    actInfo = []
-    actInfo.append(school[u'results'][0][u'2015'][u'admissions'][u'act_scores'][u'midpoint'][u'cumulative'])
-    actInfo.append(school[u'results'][0][u'2015'][u'admissions'][u'act_scores'][u'midpoint'][u'english'])
-    actInfo.append(school[u'results'][0][u'2015'][u'admissions'][u'act_scores'][u'midpoint'][u'math'])
-    actInfo.append(school[u'results'][0][u'2015'][u'admissions'][u'act_scores'][u'midpoint'][u'writing'])
-    return actInfo
+    return school[u'results'][0][u'2015'][u'admissions'][u'act_scores'][u'midpoint'][u'cumulative']
+
 
 #returns information about the cost for attending the college given its id
 def getPrice (schoolId):

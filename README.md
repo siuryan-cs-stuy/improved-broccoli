@@ -19,10 +19,12 @@ Installing and setting up our app should be simple.
 3. Get the [Google Maps API key](https://developers.google.com/maps/documentation/embed/).  Click the "Get A Key" button in the top right corner and follow the steps to get an API key.
 
 ### Using the API Keys
-4. Create a file called `config.py` in the root directory of the application. Paste the following inside, replacing the angle brackets and the text inside with the respective API key you created.
+4. Create a file called `config.json` in the root directory of the application. Paste the following inside, replacing the angle brackets and the text inside with the respective API key you created.
 ```
-COLLEGE_API_KEY = <API_KEY_FROM_STEP_1>
-GOOGLE_API_KEY = <API_KEY_FROM_STEP_2>
+{
+  "COLLEGE_API_KEY": "<API_KEY_FROM_STEP_1>",
+  "GOOGLE_API_KEY": "<API_KEY_FROM_STEP_2>"
+}
 ```
 
 ### Running the Application
