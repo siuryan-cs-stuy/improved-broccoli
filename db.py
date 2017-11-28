@@ -8,7 +8,7 @@ c.execute('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY,username TEX
 db.close()
 
 #returns the id of the user given the username
-def getID(user):
+def get_ID(user):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
@@ -20,7 +20,7 @@ def getID(user):
 #add the user to the database
 #do NOT use this function since the password is not encrypted
 #to add a user with encryption look at the add_user(username,password) method in auth
-def adduser(username,password):
+def add_user(username,password):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
@@ -64,8 +64,8 @@ def get_pass(username):
         return result[0][0]
    
 #set a college as a favorite of the user
-#accepts c_id as college id and s_id as user id which you can get with getID(<username>)
-def addfav(c_id, s_id):
+#accepts c_id as college id and s_id as user id which you can get with get_ID(<username>)
+def add_fav(c_id, s_id):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
@@ -81,7 +81,7 @@ def addfav(c_id, s_id):
 
 #returns a dictionary of the user's favorite collegs
 #s_id is user id
-def getfavs(s_id):
+def get_favs(s_id):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
@@ -91,15 +91,15 @@ def getfavs(s_id):
     return result
 
 def school_in_favs(c_id, s_id):
-    favs = getfavs(s_id)
+    favs = get_favs(s_id)
     for fav in favs:
         if c_id in fav:
             return True
     return False
 
 #removes a school from a user's favorite list
-#removeFave(<college id>,<user id>)
-def removeFave(school_id, s_id):
+#remove_fave(<college id>,<user id>)
+def remove_fave(school_id, s_id):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()

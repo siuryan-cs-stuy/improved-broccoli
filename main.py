@@ -91,23 +91,23 @@ def profile():
 
     college = {}
     college['school_id'] = school_id
-    college['name'] = api.getName(school_id)
-    college['city'] = api.getCity(school_id)
-    college['state'] = api.getState(school_id)
-    college['website'] = api.getUrl(school_id)
-    college['netPriceSite'] = api.getPriceUrl(school_id)
-    college['gender'] = api.getGender(school_id)
-    college['completion'] = api.getCompletion(school_id)
-    college['admRate'] = api.getAdmRate(school_id)
+    college['name'] = api.get_name(school_id)
+    college['city'] = api.get_city(school_id)
+    college['state'] = api.get_state(school_id)
+    college['website'] = api.get_url(school_id)
+    college['netPriceSite'] = api.get_price_url(school_id)
+    college['gender'] = api.get_gender(school_id)
+    college['completion'] = api.get_completion(school_id)
+    college['admRate'] = api.get_adm_rate(school_id)
     #satInfo and actInfo are lists of overall and section averages
-    college['satInfo'] = api.getSat(school_id)
-    college['actInfo'] = api.getAct(school_id)
-    college['size'] = api.getSize(school_id)
-    college['avgPrice'] = api.getPrice(school_id)
-    college['debt'] = api.getDebt(school_id)
-    college['pell'] = api.getPellGrant(school_id)
+    college['satInfo'] = api.get_sat(school_id)
+    college['actInfo'] = api.get_act(school_id)
+    college['size'] = api.get_size(school_id)
+    college['avgPrice'] = api.get_price(school_id)
+    college['debt'] = api.get_debt(school_id)
+    college['pell'] = api.get_pell_grant(school_id)
 
-    degrees = api.getDegrees(school_id)
+    degrees = api.get_degrees(school_id)
 
     degrees_labels = []
     degrees_data = []
@@ -118,7 +118,7 @@ def profile():
     college['degrees_labels'] = degrees_labels
     college['degrees_data'] = degrees_data
 
-    eth = api.getEthnicity(school_id)
+    eth = api.get_ethnicity(school_id)
 
     eth_labels = []
     eth_data = []
@@ -135,7 +135,7 @@ def profile():
 
     favorited = None
     if auth.logged_in():
-        s_id = db.getID(session['username'])
+        s_id = db.get_ID(session['username'])
         favorited = db.school_in_favs(int(school_id), s_id)
         
     return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY, search_page = True, favorited = favorited, place = place)
@@ -145,7 +145,7 @@ def profile():
 @app.route('/results')
 def results():
     query = request.args.get('search')
-    ids = api.getId(query)
+    ids = api.get_id(query)
     if len(ids) == 0:
         return render_template('results.html', noMatch = True)
                         
@@ -155,24 +155,24 @@ def results():
     schools = {}
     school_locations = {}
     for school_id in ids:
-        schools[school_id] = api.getName(school_id)
-        school_locations[school_id] = api.getCity(school_id) + ', ' + api.getState(school_id)
+        schools[school_id] = api.get_name(school_id)
+        school_locations[school_id] = api.get_city(school_id) + ', ' + api.get_state(school_id)
 
     return render_template('results.html', schools = schools, school_locations = school_locations, search_page = True, noMatch = False)
 
 @app.route('/favorites')
 def favorites():
-    faveList = []
+    fave_list = []
     if auth.logged_in():
-        s_id = db.getID(session['username'])
-        for school in db.getfavs(s_id):
-            faveList.append(school[0])
+        s_id = db.get_ID(session['username'])
+        for school in db.get_favs(s_id):
+            fave_list.append(school[0])
         schools = {}
-        for school_id in faveList:
-            schools[school_id] = api.getName(school_id)
+        for school_id in fave_list:
+            schools[school_id] = api.get_name(school_id)
         if len(schools) == 0:
-            return render_template('favorites.html', noFaves = True, username = session['username'].capitalize())
-        return render_template('favorites.html', schools = schools, search_page = True, username = session['username'].capitalize(), noFaves = False)
+            return render_template('favorites.html', no_faves = True, username = session['username'].capitalize())
+        return render_template('favorites.html', schools = schools, search_page = True, username = session['username'].capitalize(), no_faves = False)
     else:
         flash('You must be logged in to view this page.')
         return redirect('index')
@@ -180,11 +180,11 @@ def favorites():
 @app.route('/toggle_fave')
 def toggle_fave():
     school_id = int(request.args.get('school_id'))
-    self_id = db.getID(session['username'])
+    self_id = db.get_ID(session['username'])
     if db.school_in_favs(school_id, self_id):
-        db.removeFave(school_id, self_id)
+        db.remove_fave(school_id, self_id)
     else:
-        db.addfav(school_id, self_id)
+        db.add_fav(school_id, self_id)
     return redirect(url_for('profile', school_id = school_id))
 
 
