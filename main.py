@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import api
-import config
 import auth
 import os
 import db
@@ -138,7 +137,7 @@ def profile():
         s_id = db.getID(session['username'])
         favorited = db.school_in_favs(int(school_id), s_id)
         
-    return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY, search_page = True, favorited = favorited, place = place)
+    return render_template('profile.html', college = college, GOOGLE_API_KEY = api.GOOGLE_API_KEY, search_page = True, favorited = favorited, place = place)
 
 
 #renders results.html and passes list of ids and list of names 
@@ -146,9 +145,8 @@ def profile():
 def results():
     query = request.args.get('search')
     ids = api.getId(query)
-    if len(ids) == 0:
-        return render_template('results.html', noMatch = True)
-                        
+    noMatch = (len(ids) == 0)
+        
     if len(ids) == 1:
         return redirect(url_for('profile', school_id = ids[0]))
 
@@ -158,7 +156,7 @@ def results():
         schools[school_id] = api.getName(school_id)
         school_locations[school_id] = api.getCity(school_id) + ', ' + api.getState(school_id)
 
-    return render_template('results.html', schools = schools, school_locations = school_locations, search_page = True, noMatch = False)
+    return render_template('results.html', schools = schools, school_locations = school_locations, search_page = True, noMatch = noMatch)
 
 @app.route('/favorites')
 def favorites():

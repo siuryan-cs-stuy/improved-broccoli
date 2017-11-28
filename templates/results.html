@@ -13,25 +13,25 @@ Results
 
       <div class="large-8 medium-10 cell">
         <h1 class="text-center">Results</h1>
-	{% if noMatch %}
-	<p class="text-center">Sorry, there were no matches for your search.</p>
+	      {% if noMatch %}
+	      <p class="text-center">Sorry, there were no matches for your search.</p>
 
-	{% else %}
+	      {% else %}
         <table>
-	  <tr>
+	        <tr>
             <td>Name</td>
             <td>Location</td>
             <td>Link</td>
           </tr>
-	  {% for id in schools %}
-	  <tr>
-	    <td>{{ schools[id] }}</td>
+	        {% for id in schools %}
+	        <tr>
+	          <td>{{ schools[id] }}</td>
             <td>{{ school_locations[id] }}</td>
             <td><a class="button button-no-margin" href="{{ url_for('profile', school_id = id) }}">View</a></td>
           </tr>
-	  {% endfor %}
+	        {% endfor %}
         </table>
-	{% endif %}
+	      {% endif %}
       </div>
 
       <div class="large-2 medium-1 cell"></div>
