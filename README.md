@@ -1,4 +1,4 @@
-# Naviance 2.0
+# Naviance II
 MaKERs<br>
 Ryan Siu, Michela Marchini, Kerry Chen, Edmond Wong<br>
 Software Development<br>
@@ -12,14 +12,18 @@ Welcome to Naviance II!  The goal of our app is to provide a comprehensive overv
 Installing and setting up our app should be simple.
 
 ### Getting API Keys
-1. Go to https://api.data.gov/signup and fill out the form to get an API key.  The API key will be emailed to you.  
-2. To get the Google Maps API key, go to https://developers.google.com/maps/documentation/embed/.  Click the "Get A Key" button in the top right corner and follow the steps to get an API key.
+1. Go to the [College Scorecard website](https://api.data.gov/signup) and fill out the form to get an API key.  The API key will be emailed to you.  
+2. Get the [Google Maps API key](https://developers.google.com/maps/documentation/embed/).  Click the "Get A Key" button in the top right corner and follow the steps to get an API key.
 
 ### Using the API Keys
-3. Create a file called ```config.py```. Paste the following inside, replacing the angle brackets...
+3. Create a file called `config.py`. Paste the following inside, replacing the angle brackets and the text inside with the respective API key you created.
+```
+COLLEGE_API_KEY = <API_KEY_FROM_STEP_1>
+GOOGLE_API_KEY = <API_KEY_FROM_STEP_2>
+```
 
 ### Installing and Running the Application
-
-When you get it, copy and paste it into the file called config.py inside the quotation marks next to COLLEGE_API_KEY.    Once you have your API key, copy and paste it into config.py inside the quotation marks next to GOOGLE_API_KEY. <br>
-In order to run this app, your computer will need to be running python.  If it is not already on your computer (it comes preinstalled on Macs), you can download it here: https://www.python.org/downloads/.  In addition, you will need to install Flask.  You can do this by going to your terminal and typing "pip install Flask". <br>
-Congratulations, you are now ready to run Naviance II!
+4. Clone this repository with `git clone https://github.com/siuryan-cs-stuy/naviance2.0`.
+5. In order to run this app, your computer will need to have Python 2.7 and the Flask module.  To install Flask, use `pip install Flask` in the terminal.
+6. In the root directory of the application, run `python main.py`.
+5. Open a web browser and go to [localhost](localhost:5000). Congratulations, you should be running Naviance II!
