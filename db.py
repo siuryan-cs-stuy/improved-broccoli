@@ -17,7 +17,7 @@ def getID(user):
     db.close()
     return result[0][0]
 
-#adds the user to the database
+#add the user to the database
 #do NOT use this function since the password is not encrypted
 #to add a user with encryption look at the add_user(username,password) method in auth
 def adduser(username,password):
@@ -69,10 +69,10 @@ def addfav(c_id, s_id):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('SELECT * FROM favorites WHERE college_id == "%d" AND user_id == "%d";'%(c_id, s_id))
+    c.execute('SELECT * FROM favorites WHERE college_id == %d AND user_id == %d;'%(c_id, s_id))
     result = c.fetchall()
-    if result == []:
-        c.execute('INSERT INTO favorites VALUES("%d","%d");'%(c_id,s_id))
+    if not result:
+        c.execute('INSERT INTO favorites VALUES(%d, %d);'%(c_id,s_id))
         db.commit()
         db.close()
         return True
@@ -85,10 +85,17 @@ def getfavs(s_id):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('SELECT college_id FROM favorites WHERE user_id == "%d";' %(s_id))
+    c.execute('SELECT college_id FROM favorites WHERE user_id == %d;' %(s_id))
     result = c.fetchall()
     db.close()
-    return result[0]
+    return result
+
+def school_in_favs(c_id, s_id):
+    favs = getfavs(s_id)
+    for fav in favs:
+        if c_id in fav:
+            return True
+    return False
 
 #removes a school from a user's favorite list
 #removeFave(<college id>,<user id>)
@@ -96,5 +103,6 @@ def removeFave(school_id, s_id):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('DELETE FROM favorites WHERE college_id == "%d" AND user_id == "%d";' %(school_id, s_id))
+    c.execute('DELETE FROM favorites WHERE college_id == %d AND user_id == %d;' %(school_id, s_id))
+    db.commit()
     db.close()

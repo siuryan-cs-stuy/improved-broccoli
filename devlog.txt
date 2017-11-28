@@ -89,3 +89,6 @@ commented db.py
 WongE -- 2017-11-27 14:45:44
 commented api.py
 
+siuR -- 2017-11-27 20:11:49
+Incorporate favorites into app
+

@@ -70,10 +70,14 @@ def create():
             flash('Passwords do not match.')
     return render_template('create.html')
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
-    college = {}
     school_id = request.args.get('school_id')
+
+    if request.method == 'POST':
+        return redirect(url_for('toggle_fave', school_id = school_id))
+
+    college = {}
     college['school_id'] = school_id
     college['name'] = api.getName(school_id)
     college['city'] = api.getCity(school_id)
@@ -118,7 +122,7 @@ def profile():
     #college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.03, 0.01, 0.01]
 
     s_id = db.getID(session['username'])
-    favorited = school_id in db.getfavs(s_id)
+    favorited = db.school_in_favs(int(school_id), s_id)
 
     return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY, search_page = True, favorited = favorited)
 
@@ -144,7 +148,7 @@ def favorites():
     if auth.logged_in():
         s_id = db.getID(session['username'])
         for school in db.getfavs(s_id):
-            faveList.append(school)
+            faveList.append(school[0])
         schools = {}
         for school_id in faveList:
             schools[school_id] = api.getName(school_id)
@@ -153,15 +157,15 @@ def favorites():
         flash('You must be logged in to view this page.')
         return redirect('index')
 
-@app.route('/toggle_fave', methods=['GET', 'POST'])
+@app.route('/toggle_fave')
 def toggle_fave():
-   school_id = int(request.form.get('favorite'))
-   s_id = db.getID(session['username'])
-   if school_id in db.getfavs(s_id):
-       db.removeFave(school_id, s_id)
-   else:
-       db.addfav(school_id, s_id)
-   return redirect(url_for('profile', school_id = school_id))
+    school_id = int(request.args.get('school_id'))
+    self_id = db.getID(session['username'])
+    if db.school_in_favs(school_id, s_id):
+        db.removeFave(school_id, s_id)
+    else:
+        db.addfav(school_id, s_id)
+    return redirect(url_for('profile', school_id = school_id))
 
 
 if __name__ == '__main__':
