@@ -39,13 +39,26 @@
 <div class="grid-x grid-padding-x">
   <div class="large-6 medium-6 cell">
     <div class="responsive-embed">
+      {% if place == "Restaurants" %}
+      <iframe src="https://www.google.com/maps/embed/v1/place?key={{ GOOGLE_API_KEY }}&q=Restaurants+near+{{ college.name }},{{ college.city }}+{{ college.state }}" frameborder="0" allowfullscreen>
+      </iframe>
+      {% elif place == "Libraries" %}
+      <iframe src="https://www.google.com/maps/embed/v1/place?key={{ GOOGLE_API_KEY }}&q=Library+near+{{ college.name }},{{ college.city }}+{{ college.state }}" frameborder="0" allowfullscreen>
+      </iframe>
+      {% elif place == "Parks" %}
+      <iframe src="https://www.google.com/maps/embed/v1/place?key={{ GOOGLE_API_KEY }}&q=Parks+near+{{ college.name }},{{ college.city }}+{{ college.state }}" frameborder="0" allowfullscreen>
+      </iframe>
+      {% else %}
       <iframe src="https://www.google.com/maps/embed/v1/place?key={{ GOOGLE_API_KEY }}&q={{ college.name }},{{ college.city }}+{{ college.state }}" frameborder="0" allowfullscreen>
       </iframe>
+      (% endif %}
+
     </div>
     <div class="expanded button-group">
-      <a class="button">Restaurants</a>
-      <a class="button">Libraries</a>
-      <a class="button">Parks</a>
+      <!-- need to fill in links -->
+      <a href = class="button">Restaurants</a>
+      <a href = class="button">Libraries</a>
+      <a href = class="button">Parks</a>
     </div>
   </div>
   <div class="large-6 medium-6 cell">
