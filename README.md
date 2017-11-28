@@ -11,19 +11,21 @@ Welcome to Naviance II!  The goal of our app is to provide a comprehensive overv
 ## Installation and Setup
 Installing and setting up our app should be simple.
 
+### Downloading the Application
+1. Clone this repository with `git clone https://github.com/siuryan-cs-stuy/naviance2.0.git`.
+
 ### Getting API Keys
-1. Go to the [College Scorecard website](https://api.data.gov/signup) and fill out the form to get an API key.  The API key will be emailed to you.  
-2. Get the [Google Maps API key](https://developers.google.com/maps/documentation/embed/).  Click the "Get A Key" button in the top right corner and follow the steps to get an API key.
+2. Go to the [College Scorecard website](https://api.data.gov/signup) and fill out the form to get an API key.  The API key will be emailed to you.  
+3. Get the [Google Maps API key](https://developers.google.com/maps/documentation/embed/).  Click the "Get A Key" button in the top right corner and follow the steps to get an API key.
 
 ### Using the API Keys
-3. Create a file called `config.py`. Paste the following inside, replacing the angle brackets and the text inside with the respective API key you created.
+4. Create a file called `config.py` in the root directory of the application. Paste the following inside, replacing the angle brackets and the text inside with the respective API key you created.
 ```
 COLLEGE_API_KEY = <API_KEY_FROM_STEP_1>
 GOOGLE_API_KEY = <API_KEY_FROM_STEP_2>
 ```
 
-### Installing and Running the Application
-4. Clone this repository with `git clone https://github.com/siuryan-cs-stuy/naviance2.0.git`.
+### Running the Application
 5. In order to run this app, your computer will need to have Python 2.7 and the Flask module.  To install Flask, use `pip install Flask` in the terminal.
 6. In the root directory of the application, run `python main.py`.
 5. Open a web browser and go to `localhost:5000`. Congratulations, you should be running Naviance II!

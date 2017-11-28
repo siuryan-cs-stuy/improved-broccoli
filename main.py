@@ -73,6 +73,9 @@ def create():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     school_id = request.args.get('school_id')
+    place = request.args.get('place')
+    if request.method == 'GET':
+        return redirect(url_for('profile', school_id = school_id place = place))
 
     if request.method == 'POST':
         return redirect(url_for('toggle_fave', school_id = school_id))
@@ -121,6 +124,7 @@ def profile():
     #college['degrees_labels'] = ['Computer Science', 'Engineering', 'Mathematics', 'Science', 'Social Science', 'English', 'History', 'Other']
     #college['degrees_data'] = [0.35, 0.2, 0.15, 0.2, 0.05, 0.03, 0.01, 0.01]
 
+<<<<<<< HEAD
     canFavorite = auth.logged_in()
     favorited = False
     if canFavorite:
@@ -128,6 +132,12 @@ def profile():
         favorited = db.school_in_favs(int(school_id), s_id)
         
     return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY, search_page = True, canFavorite = canFavorite, favorited = favorited)
+=======
+    s_id = db.getID(session['username'])
+    favorited = db.school_in_favs(int(school_id), s_id)
+
+    return render_template('profile.html', college = college, GOOGLE_API_KEY = config.GOOGLE_API_KEY, search_page = True, favorited = favorited, place = place)
+>>>>>>> 58e16147c7e4f9fa04915f1fd4537ced9b23fbf6
 
 #renders results.html and passes list of ids and list of names 
 @app.route('/results')
