@@ -4,8 +4,11 @@ import config
 import auth
 import os
 import db
+import requests, requests_cache
 
 app = Flask(__name__)
+
+requests_cache.install_cache('college_api_cache', backend='sqlite', expire_after=600)
 
 def make_secret_key():
     return "test"
@@ -178,10 +181,10 @@ def favorites():
 def toggle_fave():
     school_id = int(request.args.get('school_id'))
     self_id = db.getID(session['username'])
-    if db.school_in_favs(school_id, s_id):
-        db.removeFave(school_id, s_id)
+    if db.school_in_favs(school_id, self_id):
+        db.removeFave(school_id, self_id)
     else:
-        db.addfav(school_id, s_id)
+        db.addfav(school_id, self_id)
     return redirect(url_for('profile', school_id = school_id))
 
 
