@@ -19,7 +19,7 @@ Installing and setting up our app should be simple.
 3. Get the [Google Maps API key](https://developers.google.com/maps/documentation/embed/).  Click the "Get A Key" button in the top right corner and follow the steps to get an API key.
 
 ### Using the API Keys
-4. Create a file called `config.json` in the root directory of the application. Paste the following inside, replacing the angle brackets and the text inside with the respective API key you created.
+4. Create a file called `config.json` in the root directory of the application.  Paste the following inside, replacing the angle brackets and the text inside with the respective API key you created.
 ```
 {
   "COLLEGE_API_KEY": "<API_KEY_FROM_STEP_1>",
@@ -39,5 +39,8 @@ $ pip install requests
 $ pip install requests-cache
 ```
 6. In the root directory of the application, run `$ python main.py`.
-7. Open a web browser and go to `localhost:5000`. Congratulations, you should be running Naviance II!
+7. Open a web browser and go to `localhost:5000`.  Congratulations, you should be running Naviance II!
 8. When finished, the virtual environment can be deactivated `$ deactivate`.
+
+### Using the Application
+9. Start searching for colleges or create an account to save favorites!  By default, we have created a test account with username `harvardorbust` and password `test`.  Feel free to use that account to get a feel for the website!
