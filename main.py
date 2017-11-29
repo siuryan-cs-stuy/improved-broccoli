@@ -10,8 +10,7 @@ app = Flask(__name__)
 requests_cache.install_cache('college_api_cache', backend='sqlite', expire_after=600)
 
 def make_secret_key():
-    return "test"
-    #return os.urandom(32)
+    return os.urandom(32)
 
 app.secret_key = make_secret_key()
 
